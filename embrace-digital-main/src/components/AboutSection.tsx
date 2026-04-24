@@ -66,7 +66,7 @@ const AboutSection = () => {
               className="rounded-xl shadow-elevated w-full object-cover h-80 lg:h-96"
             />
             <div className="absolute -bottom-4 -left-4 bg-primary text-primary-foreground rounde-none px-6 py-3 shadow-lg">
-              <p className="text-2xl font-bold">2+</p>
+              <p className="text-2xl font-bold">+2</p>
               <p className="text-sm opacity-80">Anos de Experiência</p>
             </div>
           </motion.div>
