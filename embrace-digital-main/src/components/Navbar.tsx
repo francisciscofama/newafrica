@@ -1,22 +1,27 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/afrikinew-logo.png";
 
 const navLinks = [
-  { label: "Início", href: "#inicio" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Portfólio", href: "#portfolio" },
-  { label: "Clientes", href: "#clientes" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Início", href: "/#inicio" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Portfólio", href: "/#portfolio" },
+  { label: "Projectos", href: "/#gallery" },
+  { label: "Clientes", href: "/#clientes" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("#inicio");
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isSolid = scrolled || !isHome;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,19 +44,19 @@ const Navbar = () => {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
+        isSolid
           ? "bg-card/95 backdrop-blur-xl border-b border-border shadow-sm"
           : "bg-transparent border-b border-transparent"
       )}
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <a href="#inicio" className="flex items-center gap-2">
+        <a href="/#inicio" className="flex items-center gap-2">
           <img
             src={logo}
             alt="Afrikinew"
             className={cn(
               "h-[120px] object-contain transition-all",
-              !scrolled && "brightness-0 invert"
+              !isSolid && "brightness-0 invert"
             )}
           />
         </a>
@@ -65,10 +70,10 @@ const Navbar = () => {
               className={cn(
                 "text-sm font-medium px-3 py-2 rounded-none transition-all relative",
                 activeSection === link.href
-                  ? scrolled
+                  ? isSolid
                     ? "text-primary bg-accent"
                     : "text-primary-foreground bg-primary-foreground/15"
-                  : scrolled
+                  : isSolid
                   ? "text-muted-foreground hover:text-primary hover:bg-accent"
                   : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
               )}
@@ -77,13 +82,13 @@ const Navbar = () => {
             </a>
           ))}
           <Button asChild size="sm" className="ml-4 font-semibold rounded-none">
-            <a href="#contacto">Solicitar Orçamento</a>
+            <a href="/#contacto">Solicitar Orçamento</a>
           </Button>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className={cn("md:hidden", scrolled ? "text-foreground" : "text-primary-foreground")}
+          className={cn("md:hidden", isSolid ? "text-foreground" : "text-primary-foreground")}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Menu"
         >
@@ -110,7 +115,7 @@ const Navbar = () => {
             </a>
           ))}
           <Button asChild className="w-full mt-3 rounded-none">
-            <a href="#contacto" onClick={() => setIsOpen(false)}>Solicitar Orçamento</a>
+            <a href="/#contacto" onClick={() => setIsOpen(false)}>Solicitar Orçamento</a>
           </Button>
         </div>
       )}
