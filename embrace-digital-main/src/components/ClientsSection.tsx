@@ -111,7 +111,7 @@ const ClientsSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-card rounded-xl px-8 py-4 shadow-card hover:shadow-elevated hover:-translate-y-1 transition-all text-muted-foreground hover:text-primary font-heading font-semibold text-lg"
+                className="bg-card px-8 py-4 shadow-card hover:shadow-elevated hover:-translate-y-1 transition-all text-muted-foreground hover:text-primary font-heading font-semibold text-lg"
               >
                 {p}
               </motion.div>
