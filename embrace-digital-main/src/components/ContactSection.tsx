@@ -87,7 +87,7 @@ const ContactSection = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 bg-accent flex items-center justify-center shrink-0">
                 <MessageCircle className="w-5 h-5 text-primary" />
               </div>
               <div>
@@ -99,7 +99,7 @@ const ContactSection = () => {
             </div>
 
             {/* Map placeholder */}
-            <div className="rounded-xl overflow-hidden h-48 bg-muted flex items-center justify-center">
+            <div className="overflow-hidden h-48 bg-muted flex items-center justify-center">
               <iframe
                 title="Localização Afrikinew"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126093.72577!2d13.234!3d-8.838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f15cdc4867f7%3A0x23079e598b3e31ba!2sLuanda%2C%20Angola!5e0!3m2!1spt-PT!2s!4v1"
@@ -120,10 +120,10 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="bg-card rounded-xl p-8 shadow-card space-y-5"
+            className="bg-gradient-hero p-8 shadow-card space-y-5"
           >
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">
+              <label className="block text-sm font-medium text-white text-foreground mb-1.5">
                 Nome
               </label>
               <input
@@ -131,12 +131,12 @@ const ContactSection = () => {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 placeholder="O seu nome"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">
+              <label className="block text-sm font-medium text-white text-foreground mb-1.5">
                 Email
               </label>
               <input
@@ -144,12 +144,12 @@ const ContactSection = () => {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 placeholder="email@exemplo.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">
+              <label className="block text-sm font-medium text-foreground text-white mb-1.5">
                 Telefone
               </label>
               <input
@@ -161,7 +161,7 @@ const ContactSection = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">
+              <label className="block text-sm font-medium text-white text-foreground mb-1.5">
                 Mensagem
               </label>
               <textarea

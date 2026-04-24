@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 const CTASection = () => {
   return (
     <section className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-primary" />
+      <div className="absolute inset-0 bg-gradient-hero" />
       <div
         className="absolute inset-0 opacity-10"
         style={{
