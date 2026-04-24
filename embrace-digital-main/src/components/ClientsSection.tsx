@@ -63,7 +63,7 @@ const ClientsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all relative group"
+              className="bg-card rounded-none p-8 shadow-card hover:shadow-elevated transition-all relative group"
             >
               {/* Quote icon */}
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10 group-hover:text-primary/20 transition-colors" />

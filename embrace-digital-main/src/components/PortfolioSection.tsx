@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import portfolioHealth from "@/assets/portfolio-health.jpg";
-import portfolioMobile from "@/assets/portfolio-mobile.jpg";
-import portfolioEcommerce from "@/assets/portfolio-ecommerce.jpg";
+// import portfolioHealth from "@/assets/portfolio-health.jpg";
+// import portfolioMobile from "@/assets/portfolio-mobile.jpg";
+// import portfolioEcommerce from "@/assets/portfolio-ecommerce.jpg";
 import portfolioCloud from "@/assets/portfolio-cloud.jpg";
 
 const projects = [
@@ -11,21 +11,21 @@ const projects = [
     category: "Software Empresarial",
     description: "Plataforma integrada de gestão para hospitais, incluindo agendamento, prontuários eletrónicos e facturação.",
     techs: ["React", "Node.js", "PostgreSQL"],
-    image: portfolioHealth,
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "App de Pagamentos Mobile",
     category: "Aplicação Mobile",
     description: "Aplicação de pagamentos digitais com integração bancária para facilitar transações em mercados emergentes.",
     techs: ["React Native", "Firebase", "API REST"],
-    image: portfolioMobile,
+    image: "https://images.unsplash.com/photo-1514996550219-62672472d03b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "Portal E-Commerce",
     category: "Website",
     description: "Plataforma de comércio electrónico completa com gestão de stock, pagamentos online e logística integrada.",
     techs: ["Next.js", "Stripe", "MongoDB"],
-    image: portfolioEcommerce,
+    image: "https://images.unsplash.com/photo-1658297063569-162817482fb6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "Infraestrutura Cloud Corporativa",
@@ -64,22 +64,22 @@ const PortfolioSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="bg-card rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all group"
+              className="bg-card overflow-hidden shadow-card hover:shadow-elevated transition-all group flex flex-col lg:flex-row"
             >
-              <div className="h-48 relative overflow-hidden">
+              <div className="h-48 lg:h-auto lg:w-[60%] relative overflow-hidden shrink-0">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors flex items-center justify-center">
                   <ExternalLink className="w-10 h-10 text-primary-foreground opacity-0 group-hover:opacity-80 transition-opacity" />
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-6 lg:w-[30%] flex flex-col justify-center">
                 <span className="text-xs font-semibold text-secondary uppercase tracking-wider">{project.category}</span>
                 <h3 className="text-xl font-bold text-foreground mt-1 mb-2">{project.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">{project.description}</p>
+                <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.techs.map((tech) => (
                     <span key={tech} className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full font-medium">

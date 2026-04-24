@@ -84,7 +84,7 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-xl p-6 shadow-card hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden"
+              className="bg-card rounded-none p-6 shadow-card hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden"
             >
               {/* Hover gradient overlay */}
               <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

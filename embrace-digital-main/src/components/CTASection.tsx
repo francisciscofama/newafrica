@@ -47,7 +47,7 @@ const CTASection = () => {
             <Button
               asChild
               size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold text-base px-8 h-14 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+              className="bg-secondary rounded-none hover:bg-secondary/90 text-secondary-foreground font-semibold text-base px-8 h-14 hover:shadow-xl transition-all hover:-translate-y-0.5"
             >
               <a href="#contacto">
                 Solicitar Orçamento Grátis
@@ -58,7 +58,7 @@ const CTASection = () => {
               asChild
               size="lg"
               variant="outline"
-              className="border-primary-foreground/30 text-black hover:bg-primary-foreground/10 font-semibold text-base px-8 h-14 rounded-xl"
+              className="border-primary-foreground/30 rounded-none text-black hover:bg-primary-foreground/10 hover:text-white font-semibold text-base px-8 h-14"
             >
               <a
                 href="https://chat.whatsapp.com/CDMncFLnmoI7GZHWQzWNiS"

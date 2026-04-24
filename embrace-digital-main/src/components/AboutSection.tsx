@@ -65,7 +65,7 @@ const AboutSection = () => {
               alt="Equipa Afrikinew a trabalhar"
               className="rounded-xl shadow-elevated w-full object-cover h-80 lg:h-96"
             />
-            <div className="absolute -bottom-4 -left-4 bg-primary text-primary-foreground rounded-xl px-6 py-3 shadow-lg">
+            <div className="absolute -bottom-4 -left-4 bg-primary text-primary-foreground rounde-none px-6 py-3 shadow-lg">
               <p className="text-2xl font-bold">2+</p>
               <p className="text-sm opacity-80">Anos de Experiência</p>
             </div>
@@ -80,17 +80,20 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-card rounded-xl p-8 shadow-card hover:shadow-elevated transition-shadow"
+              className="flex flex-row items-center gap-4 bg-card p-8 shadow-card hover:shadow-elevated transition-shadow"
             >
-              <div className="w-14 h-14 rounded-lg bg-accent flex items-center justify-center mb-5">
+              
+              <div className="detail">
+                <h3 className="text-xl font-bold text-foreground">
+                {item.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+              <div className="flex items-center justify-center">
                 <item.icon className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-3">
-                {item.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {item.description}
-              </p>
             </motion.div>
           ))}
         </div>

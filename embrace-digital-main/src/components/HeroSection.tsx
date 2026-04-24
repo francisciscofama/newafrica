@@ -141,7 +141,7 @@ const HeroSection = () => {
             <Button
               asChild
               size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold text-base px-8 h-14 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+              className="bg-secondary rounded-none hover:bg-secondary/90 text-secondary-foreground font-semibold text-base px-8 h-14 transition-all hover:-translate-y-0.5"
             >
               <a href="#contacto">
                 Solicitar Orçamento
@@ -152,7 +152,7 @@ const HeroSection = () => {
               asChild
               size="lg"
               variant="outline"
-              className="border-primary-foreground/30 text-black hover:bg-primary-foreground/10 font-semibold text-base px-8 h-14 rounded-xl backdrop-blur-sm"
+              className="border-primary-foreground/30 rounded-none text-black hover:bg-primary-foreground/10 hover:text-white font-semibold text-base px-8 h-14 backdrop-blur-sm"
             >
               <a href="#servicos">
                 <Play className="mr-2 w-4 h-4" />
