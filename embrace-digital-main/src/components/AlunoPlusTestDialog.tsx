@@ -84,28 +84,29 @@ export default function AlunoPlusTestDialog({ open, onOpenChange, onFinish }: Pr
         onOpenChange(nextOpen);
       }}
     >
-      <DialogContent className="w-[92vw] max-w-2xl p-0 overflow-hidden">
-        <div className="p-6 border-b border-border">
-          <DialogHeader>
-            <DialogTitle className="text-xl">Teste vocacional — Aluno+</DialogTitle>
-          </DialogHeader>
-          <div className="mt-3 flex items-center justify-between gap-3">
-            <p className="text-sm text-muted-foreground">
-              Etapa {stepIndex + 1} de {STEPS} • {answeredCount}/{VOCATIONAL_QUESTIONS.length} respondidas
-            </p>
-            <div className="w-40">
-              <Progress value={progressValue} />
+      <DialogContent className="w-[calc(100vw-1rem)] sm:w-[92vw] max-w-2xl p-0 overflow-hidden max-h-[90vh]">
+        <div className="flex flex-col max-h-[90vh]">
+          <div className="shrink-0 p-4 sm:p-6 border-b border-border">
+            <DialogHeader>
+              <DialogTitle className="text-xl leading-tight">Teste vocacional — Aluno+</DialogTitle>
+            </DialogHeader>
+            <div className="mt-3 flex items-center justify-between gap-3 max-[430px]:flex-col max-[430px]:items-stretch max-[430px]:gap-2">
+              <p className="text-sm text-muted-foreground">
+                Etapa {stepIndex + 1} de {STEPS} • {answeredCount}/{VOCATIONAL_QUESTIONS.length} respondidas
+              </p>
+              <div className="w-36 sm:w-40 max-[430px]:w-full">
+                <Progress value={progressValue} />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="p-6">
-          <div className="rounded-md bg-muted p-3">
-            <p className="text-xs text-muted-foreground">Como responder</p>
-            <p className="text-sm text-foreground mt-1">
-              Para cada frase, escolha um valor de 1 a 5: 1 = pouco a ver comigo, 5 = muito a ver comigo.
-            </p>
-          </div>
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+            <div className="rounded-md bg-muted p-3">
+              <p className="text-xs text-muted-foreground">Como responder</p>
+              <p className="text-sm text-foreground mt-1">
+                Para cada frase, escolha um valor de 1 a 5: 1 = pouco a ver comigo, 5 = muito a ver comigo.
+              </p>
+            </div>
 
           <div className="mt-5">
             <AnimatePresence mode="wait" initial={false}>
@@ -135,7 +136,7 @@ export default function AlunoPlusTestDialog({ open, onOpenChange, onFinish }: Pr
                   const value = answers[question.id];
 
                   return (
-                    <div key={question.id} className="rounded-md border border-border p-4">
+                    <div key={question.id} className="rounded-md border border-border p-4 max-[430px]:p-3">
                       <p className="text-xs text-muted-foreground">
                         Pergunta {absoluteIndex} de {VOCATIONAL_QUESTIONS.length}
                       </p>
@@ -177,18 +178,24 @@ export default function AlunoPlusTestDialog({ open, onOpenChange, onFinish }: Pr
           ) : null}
 
           <div className="mt-6 flex items-center justify-between gap-2">
-            <Button variant="outline" onClick={reset}>
+            <Button variant="outline" onClick={reset} className="max-[430px]:w-full">
               Recomeçar
             </Button>
 
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={goPrev} disabled={stepIndex === 0}>
+            <div className="flex gap-2 max-[430px]:flex-col max-[430px]:w-full">
+              <Button
+                variant="outline"
+                onClick={goPrev}
+                disabled={stepIndex === 0}
+                className="max-[430px]:w-full"
+              >
                 Etapa anterior
               </Button>
-              <Button onClick={goNext} disabled={!isStepComplete}>
+              <Button onClick={goNext} disabled={!isStepComplete} className="max-[430px]:w-full">
                 {stepIndex === STEPS - 1 ? "Finalizar" : "Próxima etapa"}
               </Button>
             </div>
+          </div>
           </div>
         </div>
       </DialogContent>
