@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import ffneo from "../assets/Partners/FFNeoCommerce.jpg";
+import luctech from "../assets/Partners/LUCTech.jpg";
+import tchohamba from "../assets/Partners/Grupo Tchohamba.jpg";
 
 const testimonials = [
   {
@@ -27,11 +30,11 @@ const testimonials = [
 ];
 
 const partners = [
-  "FFNEOCOMMERCE",
-  "LUCTECH",
-  "ADPGEST",
-  "FF CENTER",
-  "GRUPO TCHOHAMBA",
+  { name: "FFNEOCOMMERCE", logo: ffneo },
+  { name: "LUCTECH", logo: luctech },
+  { name: "ADPGEST", logo: null },
+  { name: "FF CENTER", logo: null },
+  { name: "GRUPO TCHOHAMBA", logo: tchohamba },
 ];
 
 const ClientsSection = () => {
@@ -103,19 +106,47 @@ const ClientsSection = () => {
           <p className="text-sm text-muted-foreground mb-8 uppercase tracking-widest font-semibold">
             Empresas que confiam em nós
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {partners.map((p, i) => (
-              <motion.div
-                key={p}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-card px-8 py-4 shadow-card hover:shadow-elevated hover:-translate-y-1 transition-all text-muted-foreground hover:text-primary font-heading font-semibold text-lg"
-              >
-                {p}
-              </motion.div>
-            ))}
+          <div className="flex overflow-hidden group">
+            <div className="flex gap-8 animate-loop-scroll group-hover:[animation-play-state:paused] min-w-max pr-8">
+              {[...partners, ...partners].map((p, i) => (
+                <div
+                  key={`first-${p.name}-${i}`}
+                  className="flex-shrink-0 flex items-center justify-center w-48 h-24 bg-card shadow-card p-4"
+                >
+                  {p.logo ? (
+                    <img 
+                      src={p.logo} 
+                      alt={p.name} 
+                      className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  ) : (
+                    <span className="font-heading font-semibold text-lg text-muted-foreground hover:text-primary transition-all">
+                      {p.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-8 animate-loop-scroll group-hover:[animation-play-state:paused] min-w-max pr-8" aria-hidden="true">
+              {[...partners, ...partners].map((p, i) => (
+                <div
+                  key={`second-${p.name}-${i}`}
+                  className="flex-shrink-0 flex items-center justify-center w-48 h-24 bg-card shadow-card p-4"
+                >
+                  {p.logo ? (
+                    <img 
+                      src={p.logo} 
+                      alt={p.name} 
+                      className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  ) : (
+                    <span className="font-heading font-semibold text-lg text-muted-foreground hover:text-primary transition-all">
+                      {p.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

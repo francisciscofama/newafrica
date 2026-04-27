@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, ZoomIn, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import AlunoPlusModalContent from './AlunoPlusModalContent';
 
 import img1 from '../assets/Associação Mabunda Okwatissa/Imagens do lar/IMG-20260423-WA0010.jpg';
 import img2 from '../assets/Associação Mabunda Okwatissa/Imagens do lar/IMG-20260423-WA0011.jpg';
@@ -26,9 +27,25 @@ const projects = [
     title: "Associação Mabunda Okwatissa",
     description: "Conheça o nosso impacto e o trabalho desenvolvido no campo.",
     cover: img1,
+    type: "gallery" as const,
     images: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16]
+  },
+  {
+    id: "aluno-plus",
+    title: "Aluno+",
+    description: "Um projeto para ajudar estudantes com teste vocacional e escolha de carreiras.",
+    cover: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    type: "modal" as const,
+    images: [],
+    modalContent: {
+      header: "Aluno+ - Teste Vocacional Gratuito",
+      body: [
+        "O Teste Vocacional Aluno+ cruza seus interesses e habilidades com áreas de estudo e profissões, usando como referência a Teoria das Inteligências Múltiplas (Howard Gardner).",
+        "Ele ajuda os alunos a explorarem seus perfis, indicando os cursos mais compatíveis e sugerindo caminhos de carreira em apenas algumas perguntas rápidas.",
+        "Funciona através da análise de habilidades linguísticas, lógico-matemáticas, musicais, espaciais, e outras para sugerir a graduação ideal na hora de buscar o ensino superior e investir no seu futuro."
+      ]
+    }
   }
-  // Future projects can be added here
 ];
 
 const ProjectsSection = () => {
@@ -37,15 +54,19 @@ const ProjectsSection = () => {
 
   const openVisualizer = (projectIndex: number) => {
     setActiveProjectIndex(projectIndex);
-    setSelectedImageIndex(0);
-    document.body.style.overflow = 'hidden';
+    if (projects[projectIndex].type === "gallery") {
+      setSelectedImageIndex(0);
+      document.body.style.overflow = 'hidden';
+    }
   };
 
   const closeVisualizer = useCallback(() => {
+    if (activeProjectIndex !== null && projects[activeProjectIndex].type === "gallery") {
+      document.body.style.overflow = 'auto';
+    }
     setActiveProjectIndex(null);
     setSelectedImageIndex(null);
-    document.body.style.overflow = 'auto';
-  }, []);
+  }, [activeProjectIndex]);
 
   const navigateImage = useCallback((direction: 'next' | 'prev', e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -76,7 +97,7 @@ const ProjectsSection = () => {
   return (
     <section id="gallery" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {activeProjectIndex === null ? (
+        {activeProjectIndex === null || projects[activeProjectIndex].type === 'modal' ? (
           <>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -90,11 +111,11 @@ const ProjectsSection = () => {
                 Nossas <span className="text-primary">Iniciativas</span>
               </h2>
               <p className="text-muted-foreground text-lg">
-                Clique num projecto para ver a galeria completa.
+                Clique num projecto para ver a galeria ou os detalhes completos.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 justify-center [grid-template-columns:repeat(auto-fit,minmax(240px,360px))]">
               {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
@@ -103,7 +124,7 @@ const ProjectsSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.12 }}
                   onClick={() => openVisualizer(index)}
-                  className="bg-card overflow-hidden shadow-card hover:shadow-elevated transition-all group cursor-pointer flex flex-col"
+                  className="w-full bg-card overflow-hidden shadow-card hover:shadow-elevated transition-all group cursor-pointer flex flex-col"
                 >
                   <div className="h-56 relative overflow-hidden shrink-0">
                     <img
@@ -113,12 +134,14 @@ const ProjectsSection = () => {
                     />
                     <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors flex items-center justify-center">
                        <span className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">
-                         Ver Galeria
+                         {project.type === "gallery" ? "Ver Galeria" : "Ver Detalhes"}
                        </span>
                     </div>
-                    <div className="absolute bottom-3 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
-                      {project.images.length} fotos
-                    </div>
+                    {project.type === "gallery" && (
+                      <div className="absolute bottom-3 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
+                        {project.images.length} fotos
+                      </div>
+                    )}
                   </div>
                   <div className="p-6 flex flex-col justify-center">
                     <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
@@ -211,6 +234,36 @@ const ProjectsSection = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Modal for Projects like Aluno+ */}
+        <Dialog 
+          open={activeProjectIndex !== null && projects[activeProjectIndex].type === 'modal'} 
+          onOpenChange={(open) => {
+            if (!open) closeVisualizer();
+          }}
+        >
+          {activeProjectIndex !== null && projects[activeProjectIndex].type === 'modal' && (
+            <DialogContent className="w-[92vw] max-w-none h-[75vh] sm:w-[80vw] overflow-hidden p-0 gap-0 flex flex-col">
+              {projects[activeProjectIndex].id === 'aluno-plus' ? (
+                <AlunoPlusModalContent />
+              ) : (
+                <div className="p-6">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold">{projects[activeProjectIndex].modalContent?.header}</DialogTitle>
+                    <DialogDescription>
+                      {projects[activeProjectIndex].description}
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-4 py-4 text-foreground text-base">
+                    {projects[activeProjectIndex].modalContent?.body.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </DialogContent>
+          )}
+        </Dialog>
       </div>
     </section>
   );
