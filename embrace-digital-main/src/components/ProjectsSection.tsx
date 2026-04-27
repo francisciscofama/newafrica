@@ -245,7 +245,7 @@ const ProjectsSection = () => {
           {activeProjectIndex !== null && projects[activeProjectIndex].type === 'modal' && (
             <DialogContent className="w-[92vw] max-w-none h-[75vh] sm:w-[80vw] overflow-hidden p-0 gap-0 flex flex-col">
               {projects[activeProjectIndex].id === 'aluno-plus' ? (
-                <AlunoPlusModalContent />
+                <AlunoPlusModalContent onRequestClose={closeVisualizer} />
               ) : (
                 <div className="p-6">
                   <DialogHeader>
