@@ -22,6 +22,7 @@ import img8 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0012.jpg";
 import img9 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0013.jpg";
 import img10 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0014.jpg";
 import img11 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0015.jpg";
+import img12 from "../assets/Fotos adicionais/CEO.jpeg";
 import vid1 from "../assets/Colégio Colina do Sol/VID-20260429-WA0002.mp4";
 import vid2 from "../assets/Colégio Colina do Sol/VID-20260429-WA0003.mp4";
 import vid3 from "../assets/Colégio Colina do Sol/VID-20260429-WA0007.mp4";
@@ -50,6 +51,7 @@ const eventHighlights = [
 const mediaItems = [
 	{ type: "image", src: img1, label: "Foto", title: "Entrada do evento", span: "md:col-span-2 md:row-span-2" },
 	{ type: "video", src: vid1, label: "Vídeo", title: "Abrindo o evento", span: "md:col-span-1" },
+	{ type: "image", src: img12, label: "Foto", title: "CEO e Vice", span: "md:col-span-2 md:row-span-2" },
 	{ type: "image", src: img2, label: "Foto", title: "Recepção", span: "md:col-span-1" },
 	{ type: "image", src: img3, label: "Foto", title: "Participação dos alunos", span: "md:col-span-1" },
 	{ type: "video", src: vid2, label: "Vídeo", title: "Registo em vídeo", span: "md:col-span-1 md:row-span-2" },
@@ -67,9 +69,16 @@ const mediaItems = [
 	{ type: "video", src: vid6, label: "Vídeo", title: "Clausura do evento", span: "md:col-span-2" },
 ];
 
+type MediaItem = (typeof mediaItems)[number];
+
 const EventsSection = () => {
 	const [galleryOpen, setGalleryOpen] = useState(false);
+	const [viewerItem, setViewerItem] = useState<MediaItem | null>(null);
 	const previewItems = mediaItems.slice(0, 5);
+
+	const openViewer = (item: MediaItem) => {
+		setViewerItem(item);
+	};
 
 	return (
 		<section id="eventos" className="py-16 bg-muted relative overflow-hidden">
@@ -126,7 +135,7 @@ const EventsSection = () => {
 
 						<div className="flex flex-wrap items-center gap-3 pt-1">
 							<Button className="rounded-none" onClick={() => setGalleryOpen(true)}>
-								See More Gallery
+								Ver toda a galeria
 							</Button>
 							<p className="text-sm text-muted-foreground">Abra a galeria completa com imagens e vídeos.</p>
 						</div>
@@ -134,26 +143,27 @@ const EventsSection = () => {
 
 					<div className="grid gap-4 grid-cols-2 auto-rows-[150px] md:auto-rows-[180px]">
 						{previewItems.map((item, index) => (
-							<motion.article
+							<motion.button
+								type="button"
 								key={`${item.title}-${index}`}
 								initial={{ opacity: 0, y: 30 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ duration: 0.5, delay: index * 0.04 }}
-								className={`relative overflow-hidden bg-card shadow-card border border-border/30 ${index === 0 ? "col-span-2 row-span-2" : ""}`}
+								onClick={() => openViewer(item)}
+								className={`group relative overflow-hidden bg-card shadow-card border border-border/30 text-left ${index === 0 ? "col-span-2 row-span-2" : ""}`}
 							>
 								{item.type === "image" ? (
 									<img
 										src={item.src}
 										alt={item.title}
-										className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+										className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 										loading="lazy"
 									/>
 								) : (
 									<video
 										src={item.src}
 										className="absolute inset-0 h-full w-full object-cover"
-										controls
 										muted
 										playsInline
 										preload="metadata"
@@ -172,7 +182,7 @@ const EventsSection = () => {
 										{item.type === "image" ? <Camera className="w-4 h-4" /> : <PlayCircle className="w-4 h-4" />}
 									</div>
 								</div>
-							</motion.article>
+							</motion.button>
 						))}
 					</div>
 				</div>
@@ -183,29 +193,31 @@ const EventsSection = () => {
 							<DialogHeader>
 								<DialogTitle className="text-2xl font-bold">Galeria completa do evento</DialogTitle>
 								<DialogDescription>
-									Imagens e vídeos do Colégio Colina do Sol em visualização ampliada.
+									Clique em qualquer imagem ou vídeo para abrir a visualização individual.
 								</DialogDescription>
 							</DialogHeader>
 						</div>
 						<div className="p-4 md:p-6 overflow-y-auto max-h-[calc(90vh-92px)]">
 							<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[220px]">
 								{mediaItems.map((item, index) => (
-									<div
+									<button
+										type="button"
 										key={`${item.title}-gallery-${index}`}
-										className={`relative overflow-hidden bg-card shadow-card border border-border/30 ${item.span}`}
+										onClick={() => openViewer(item)}
+										className={`group relative overflow-hidden bg-card shadow-card border border-border/30 text-left ${item.span}`}
 									>
 										{item.type === "image" ? (
 											<img
 												src={item.src}
 												alt={item.title}
-												className="absolute inset-0 h-full w-full object-cover"
+												className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 												loading="lazy"
 											/>
 										) : (
 											<video
 												src={item.src}
 												className="absolute inset-0 h-full w-full object-cover"
-												controls
+												muted
 												playsInline
 												preload="metadata"
 											/>
@@ -223,10 +235,44 @@ const EventsSection = () => {
 												{item.type === "image" ? <Camera className="w-4 h-4" /> : <PlayCircle className="w-4 h-4" />}
 											</div>
 										</div>
-									</div>
+									</button>
 								))}
 							</div>
 						</div>
+					</DialogContent>
+				</Dialog>
+
+				<Dialog open={viewerItem !== null} onOpenChange={(open) => !open && setViewerItem(null)}>
+					<DialogContent className="max-w-5xl w-[95vw] max-h-[92vh] overflow-hidden p-0 gap-0">
+						{viewerItem && (
+							<>
+								<div className="p-6 border-b border-border/40">
+									<DialogHeader>
+										<DialogTitle className="text-2xl font-bold">{viewerItem.title}</DialogTitle>
+										<DialogDescription>
+											{viewerItem.type === "image" ? "Visualização individual da imagem." : "Visualização individual do vídeo."}
+										</DialogDescription>
+									</DialogHeader>
+								</div>
+								<div className="bg-black flex items-center justify-center p-3 md:p-6 min-h-[50vh] max-h-[calc(92vh-92px)]">
+									{viewerItem.type === "image" ? (
+										<img
+											src={viewerItem.src}
+											alt={viewerItem.title}
+											className="max-h-[calc(92vh-140px)] w-auto max-w-full object-contain rounded-sm shadow-2xl"
+										/>
+									) : (
+										<video
+											src={viewerItem.src}
+											className="max-h-[calc(92vh-140px)] w-auto max-w-full rounded-sm shadow-2xl"
+											controls
+											playsInline
+											preload="metadata"
+										/>
+									)}
+								</div>
+							</>
+						)}
 					</DialogContent>
 				</Dialog>
 			</div>
