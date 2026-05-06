@@ -17,7 +17,6 @@ import img3 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0006.jpg";
 import img4 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0008.jpg";
 import img5 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0009.jpg";
 import img6 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0010.jpg";
-import img7 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0011.jpg";
 import img8 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0012.jpg";
 import img9 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0013.jpg";
 import img10 from "../assets/Colégio Colina do Sol/IMG-20260429-WA0014.jpg";
@@ -59,7 +58,6 @@ const mediaItems = [
 	{ type: "image", src: img5, label: "Foto", title: "Interacção e alegria", span: "md:col-span-1" },
 	{ type: "video", src: vid3, label: "Vídeo", title: "Momento de destaque", span: "md:col-span-2" },
 	{ type: "image", src: img6, label: "Foto", title: "Detalhes do espaço", span: "md:col-span-1" },
-	{ type: "image", src: img7, label: "Foto", title: "Sorrisos e celebração", span: "md:col-span-1" },
 	{ type: "video", src: vid4, label: "Vídeo", title: "Durante a actividade", span: "md:col-span-1" },
 	{ type: "image", src: img8, label: "Foto", title: "Comunidade escolar", span: "md:col-span-1" },
 	{ type: "image", src: img9, label: "Foto", title: "Ambiente festivo", span: "md:col-span-1" },
